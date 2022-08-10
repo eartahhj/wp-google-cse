@@ -1,0 +1,45 @@
+# Copyright (C) 2022
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/your-theme-name\n"
+"POT-Creation-Date: 2022-08-10 00:19:50+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: search-googlecse.php:13
+msgid "WP Google CSE: Could not retrieve Engine IDs in multiple language, please check settings."
+msgstr ""
+
+# translators: %s is the searched query
+#: wp-google-cse/html/default.php:5
+msgid "Results found for: %s"
+msgstr ""
+
+#: wp-google-cse/html/default.php:10
+msgid "No results"
+msgstr ""
+
+#: wp-google-cse/html/default.php:14
+msgid "No search term entered"
+msgstr ""
+
+#: wp-google-cse/html/form.php:2
+msgid "Search website"
+msgstr ""
+
+#: wp-google-cse/html/form.php:3
+msgid "Search"
+msgstr ""
+
+#: wp-google-cse/html/pager.php:2
+msgid "Other results"
+msgstr ""
+#. Template Name of the plugin/theme
+msgid "Google Custom Search Engine"
+msgstr ""

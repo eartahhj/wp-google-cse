@@ -1,0 +1,6 @@
+@author: eartahhj - www.gaminghouse.community / www.codinghouse.it
+@version: v1.0.0
+@docs: Google Reference https://developers.google.com/custom-search/v1/cse/list
+
+v1.0.0 2022-08-05
+- First release of the Wordpress Plugin to setup Google Custom Search Engine with API Key and show search results without ads.
