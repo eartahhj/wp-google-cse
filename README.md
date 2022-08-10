@@ -61,3 +61,17 @@ Google's Custom Search API full documentation can be found here: https://develop
 ## How to customize HTML and CSS
 The front-end stylesheet is in `wp-content/plugins/wp-google-cse/css/cse.css`
 HTML views are in `wp-content/themes/{your-theme-name}/wp-google-cse/html/`, you can change them as you like, of course it is your responsibility to use correct HTML tags.
+
+## Promoted results
+In Google CSE you can set promoted results to show before your normal results. Basically these are results that you want to highlight and are triggered by some defined keywords.
+Let's say you want to show a specific page for the shoes you are selling: you can set some keywords triggers like "shoes", "men shoes", "red shoes" and show a specific URL for those. It will appear like a normal result, but will come out on top.
+
+By default, promoted results are shown on top. In case you want to show promoted results on bottom, just switch the order of `renderNormalResults` and `renderPromoResults`.
+
+You can remove  or comment `renderPromoResults` if you don't plan to use them.
+
+## Pager
+The pager works up to 10 pages (the API will show a maximum of 100 results).
+In some cases, you might see a different number of results for the same search terms.
+This is normal because Google indexes and renders results differently each time, so don't worry about it.
+At times you might click page number 8 and when the page reloads you will see there are actually only 5 pages. This still depends on the results from Google, it is not a bug of this library.
