@@ -1,17 +1,6 @@
 <?php
 namespace CodingHouse\WPPlugins\GoogleCSE;
 
-const CSE_TRANSLATIONS = [
-    1=>['it'=>'Nessun termine di ricerca inserito','en'=>'No search term entered','es'=>'No se ha introducido ningún término de búsqueda','de'=>'Keinen Suchbegriff eingegeben','fr'=>'Aucun terme de recherche saisi','ru'=>'Ничего не найдено по Вашему запросу'],
-    2=>['it'=>'Altri risultati','en'=>'Other results','es'=>'Otros resultados','de'=>'Weitere Ergebnisse','fr'=>'Autres résultats','ru'=>'Другие результаты поиска'],
-    3=>['it'=>'Risultati trovati per','en'=>'Results found for'],
-    4=>['it'=>'risultato','en'=>'result'],
-    5=>['it'=>'risultati','en'=>'results'],
-    6=>['it'=>'Nessun risultato','en'=>'No results','es'=>'Ningún resultado','de'=>'Kein Ergebnis','fr'=>'Aucun résultat','ru'=>'Ничего не найдено'],
-    7=>['it'=>'Cerca nel sito','en'=>'Search website','es'=>'Encontrar en la web','de'=>'Auf der Website suchen','fr'=>'Trouver dans le site','ru'=>'Найти на сайте'],
-    8=>['it'=>'Cerca','en'=>'Search','es'=>'Buscar','de'=>'Suchen','fr'=>'Rechercher','ru'=>'Поиск']
-];
-
 class GoogleCustomSearchEngine
 {
     protected $cseId = ''; # CSE unique ID from Google Search Console
@@ -107,7 +96,7 @@ class GoogleCustomSearchEngine
 
     public function renderNormalResults($cssClass='result')
     {
-        if (isset($this->normalResults) and $this->totalResults > 0) { # If there are normal results (not promoted)
+        if (isset($this->normalResults) and $this->totalResults > 0) {
             include __DIR__ . '/html/normal-results.php';
         }
     }
@@ -161,20 +150,6 @@ class GoogleCustomSearchEngine
         return $this->query;
     }
 
-    // public function translate($id) : string
-    // {
-    //     if (!is_numeric($id) or $id<0) {
-    //         throw new InvalidArgumentException('ID for text translation is wrong, must be an integer');
-    //         return '';
-    //     }
-    //
-    //     if ($id > 0 and isset(CSE_TRANSLATIONS[$id][$this->language])) {
-    //         return CSE_TRANSLATIONS[$id][$this->language];
-    //     }
-    //
-    //     return '';
-    // }
-
     public function renderForm(string $id = 'wp-googlecse-form-search', string $cssClass = 'wp-googlecse-form-search', string $action = '', string $method = 'get') : void
     {
         if ($action == '') {
@@ -206,7 +181,7 @@ class GoogleCustomSearchEngine
             $this->json = file_get_contents($this->url);
 
             if ($this->json) {
-                # JSON search results provided by Google Cloud Search API
+                # JSON search results provided by Google's Custom Search API
                 $this->data = json_decode($this->json);
             }
 

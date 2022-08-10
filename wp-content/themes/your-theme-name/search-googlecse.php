@@ -2,17 +2,19 @@
 /*
 Template Name: Google Custom Search Engine
 */
-require_once 'wp-google-cse/config.php';
+use \CodingHouse\WPPlugins\GoogleCSE;
+
+require_once 'CodingHouse/WPPlugins/GoogleCSE/GoogleCustomSearchEngine.php';
 
 $searchEngineId = '';
 $error = null;
 
 if (get_option('wpgooglecse_cx_multilanguage')) {
-	$searchEngineIdsMultilanguage = CodingHouse\WPPlugins\GoogleCSE\GoogleCustomSearchEngine::getMultilanguageIdsFromWpOption(get_option('wpgooglecse_cx_multilanguage'));
+	$searchEngineIdsMultilanguage = GoogleCustomSearchEngine::getMultilanguageIdsFromWpOption(get_option('wpgooglecse_cx_multilanguage'));
 	if (empty($searchEngineIdsMultilanguage)) {
 		$error = new WP_Error('wpgooglecse_error_1', _('WP Google CSE: Could not retrieve Engine IDs in multiple language, please check settings.'));
 	} else {
-		$searchEngineId = CodingHouse\WPPlugins\GoogleCSE\GoogleCustomSearchEngine::getSearchEngineIdByLanguage(substr(get_locale(), 0, 2), $searchEngineIdsMultilanguage);
+		$searchEngineId = GoogleCustomSearchEngine::getSearchEngineIdByLanguage(substr(get_locale(), 0, 2), $searchEngineIdsMultilanguage);
 	}
 } else {
 	$searchEngineId = get_option('wpgooglecse_cx') ?: '';
