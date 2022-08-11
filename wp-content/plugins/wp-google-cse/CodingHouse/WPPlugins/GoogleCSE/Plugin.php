@@ -25,7 +25,7 @@ class Plugin extends \CodingHouse\WPPlugins\PluginModel
         parent::enqueue();
 
         wp_enqueue_style('wpgcse_css', plugins_url('assets/css/cse.css', __FILE__));
-        wp_enqueue_style('wpgcse_js', plugins_url('assets/js/cse.js', __FILE__));
+        wp_enqueue_script('wpgcse_js', plugins_url('assets/js/cse.js', __FILE__));
 
         return;
     }

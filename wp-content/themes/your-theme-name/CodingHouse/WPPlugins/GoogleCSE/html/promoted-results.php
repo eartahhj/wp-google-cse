@@ -3,11 +3,11 @@
         <li class="<?=$cssClass?>">
             <?php if(($promotedResultImageSrc = $promotedResultData->pagemap->cse_image[0]->src)!=''):?>
                 <figure class="result-image">
-                    <img src="<?=htmlspecialchars($promotedResultImageSrc)?>" />
+                    <img src="<?=htmlspecialchars($promotedResultImageSrc)?>" alt="" width="150" height="150" />
                 </figure>
             <?php endif?>
             <div class="result-text">
-                <p class="result-title"><?=htmlspecialchars($promotedResultData->title)?></p>
+                <!-- <p class="result-title"><?=htmlspecialchars($promotedResultData->title)?></p> -->
                 <p class="result-link"><a href="<?=htmlspecialchars($promotedResultData->link)?>"><?=htmlspecialchars($promotedResultData->title)?></a></p>
                 <p class="result-www"><a  href="<?=htmlspecialchars($promotedResultData->link)?>"><?=htmlspecialchars($promotedResultData->link)?></a></p>
                 <?php if ($promotedResultData->bodyLines[0]->title):?>
