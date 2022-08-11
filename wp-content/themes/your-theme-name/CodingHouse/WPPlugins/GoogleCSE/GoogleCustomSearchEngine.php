@@ -24,6 +24,9 @@ class GoogleCustomSearchEngine
     protected $requestData = ''; # From JSON data->queries
     protected $searchInfo = ''; # Example: search time, total results, etc.
     protected $sort = '';
+    protected $exactSearch = false;
+    protected $searchOnlyInTitle = false;
+    protected $searchOnlyInText = false;
 
     private function setStart()
     {
@@ -165,12 +168,35 @@ class GoogleCustomSearchEngine
     {
         $this->setStart();
 
+        $modifiedQuery = '';
+
         if (isset($_GET) and isset($_GET[$this->queryHttpParam]) and $_GET[$this->queryHttpParam]) {
             $this->query = trim($_GET[$this->queryHttpParam]);
+            $modifiedQuery = $this->query;
+        }
+
+        if (get_option('wpgooglecse_exactsearch')) {
+            $this->exactSearch = true;
+        }
+
+        if (get_option('wpgooglecse_searchonly_title')) {
+            $this->searchOnlyInTitle = true;
+        } elseif (get_option('wpgooglecse_searchonly_text')) {
+            $this->searchOnlyInText = true;
         }
 
         if ($this->query != '') {
-            $this->url = 'https://www.googleapis.com/customsearch/v1?q=' . ($this->query ? urlencode($this->query) : '') . '&num=' . $this->resultsPerPage;
+            if ($this->exactSearch) {
+                $modifiedQuery = '"' . $modifiedQuery . '"';
+            }
+
+            if ($this->searchOnlyInTitle) {
+                $modifiedQuery = 'intitle:' . $modifiedQuery;
+            } elseif ($this->searchOnlyInText) {
+                $modifiedQuery = 'intext:' . $modifiedQuery;
+            }
+
+            $this->url = 'https://www.googleapis.com/customsearch/v1?q=' . ($modifiedQuery ? urlencode($modifiedQuery) : '') . '&num=' . $this->resultsPerPage;
             $this->url .= '&start=' . ($this->start ? $this->start : 1) . '&cx=' . $this->cseId . '&key=' . $this->apiKey . '&filter=1';
 
             if ($this->sort) {

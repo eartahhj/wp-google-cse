@@ -3,6 +3,7 @@
     --wpgcse-color-green: #53D72E;
     --wpgcse-color-red: #A81C1C;
     --wpgcse-color-white: #fff;
+    --wpgcse-color-orange: #d1af75;
     --wpgcse-color-links: #d35400;
 }
 
@@ -10,8 +11,17 @@
 #wp-googlecse-form-search-container { display:grid; grid-template-columns:1fr 5rem; align-items:center; }
 #wp-googlecse-form-search input { max-width:100%; }
 #wp-googlecse-form-search input:focus { border:1px dotted #444; }
-#wp-googlecse-form-search input[type="text"] { border:0; height:2.5rem; color:#000; padding:0.25rem 1.5rem 0.25rem 0.25rem; font-size:1rem; border:1px solid #000; }
-#wp-googlecse-form-search input[type="submit"], #wp-googlecse-form-search button { border:0; background-color:#444; color:#FFF; font-weight:bold; height:2.5rem; padding:0; font-size:1rem; width:100%; background-image:url('../img/search.svg'); background-position:center; background-size:auto 2rem; background-repeat:no-repeat; min-height:2.5rem; height:100%; border-radius:0; }
+#wp-googlecse-form-search input[type="search"] { border:1px solid #444; border-right:0; height:2.5rem; color:#000; padding:0.25rem 1.5rem 0.25rem 0.25rem; font-size:1rem; background-color:#fff; color:#000; border-radius:0; }
+#wp-googlecse-form-search input[type="search"]::placeholder { color:#333; }
+#wp-googlecse-form-search input[type="submit"], #wp-googlecse-form-search button { border:1px solid #000; border-left:0; background-color:var(--wpgcse-color-orange); color:#FFF; font-weight:bold; height:2.5rem; padding:0; font-size:1rem; width:100%; background-image:url('../img/search.svg'); background-position:center; background-size:auto 2rem; background-repeat:no-repeat; min-height:2.5rem; height:100%; border-radius:0; }
+
+.wp-googlecse-form-quicksearch { position:relative; }
+.wp-googlecse-form-quicksearch-container { display:grid; grid-template-columns:1fr 5rem; align-items:center; }
+.wp-googlecse-form-quicksearch input { max-width:100%; }
+.wp-googlecse-form-quicksearch input:focus { border:1px dotted #444; }
+.wp-googlecse-form-quicksearch input[type="search"] { border:0; height:2.5rem; color:#000; padding:0.25rem 1.5rem 0.25rem 0.25rem; font-size:1rem; background-color:#fff; color:#000; border-radius:0; }
+.wp-googlecse-form-quicksearch input[type="search"]::placeholder { color:#333; }
+.wp-googlecse-form-quicksearch input[type="submit"], .wp-googlecse-form-quicksearch button { border:0; background-color:var(--wpgcse-color-orange) !important; color:#FFF; font-weight:bold; height:2.5rem; padding:0; font-size:1rem; width:100%; background-image:url('../img/search.svg'); background-position:center; background-size:auto 2rem; background-repeat:no-repeat; min-height:2.5rem; height:100%; border-radius:0 !important; }
 
 .wp-googlecse-container { padding-left:2rem; padding-right:2rem; }
 .wp-googlecse-container .search-results { padding-top:2rem; }

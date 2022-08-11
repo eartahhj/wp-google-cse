@@ -16,7 +16,10 @@ class Plugin extends \CodingHouse\WPPlugins\PluginModel
             'wpgooglecse_container_html_class',
             'wpgooglecse_form_html_id',
             'wpgooglecse_form_html_class',
-            'wpgooglecse_form_action'
+            'wpgooglecse_form_action',
+            'wpgooglecse_searchonly_title',
+            'wpgooglecse_searchonly_text',
+            'wpgooglecse_exactsearch'
         ];
     }
 
@@ -44,10 +47,12 @@ class Plugin extends \CodingHouse\WPPlugins\PluginModel
                 $customActionUri = get_option('wpgooglecse_form_action') ?: wp_make_link_relative(get_page_link());
             }
 
-            return '<form method="get" action="' . $customActionUri . '">' . "\n" .
-            '<label for="wp-google-cse-quicksearch">' . esc_html__('Search website', 'wp-google-cse') . '</label>' . "\n" .
-            '<input id="wp-google-cse-quicksearch" type="search" name="q" placeholder="' . esc_html__('Search website', 'wp-google-cse') . '" value="" />' . "\n" .
-            '<input type="submit" name="search" value="' . esc_html__('Search', 'wp-google-cse') . '" />' . "\n" .
+            return '<form method="get" action="' . $customActionUri . '" class="wp-googlecse-form-quicksearch">' . "\n" .
+            '<label for="wp-googlecse-quicksearch-text" class="sr-only">' . esc_html__('Search website', 'wp-google-cse') . '</label>' . "\n" .
+            '<div class="grid wp-googlecse-form-quicksearch-container">' . "\n" .
+            '<input id="wp-googlecse-quicksearch-text" type="search" name="q" placeholder="' . esc_html__('Search website', 'wp-google-cse') . '" value="" />' . "\n" .
+            '<button type="submit" name="search"><span class="sr-only">' . esc_html__('Search', 'wp-google-cse') . '</span>' . "\n" .
+            '</div>' . "\n" .
             '</form>' . "\n";
         });
 
@@ -111,6 +116,57 @@ class Plugin extends \CodingHouse\WPPlugins\PluginModel
                 echo '</div>' . "\n";
             },
             'wp_googlecse_plugin', 'wpgooglecse_section', ['label_for' => 'wpgooglecse_apikey', 'class' => 'regular-text']
+        );
+
+        register_setting('wpgooglecse_option_group', 'wpgooglecse_searchonly_title', $callback);
+        add_settings_field(
+            'wpgooglecse_searchonly_title',
+            'Search only in the title',
+            function() {
+                echo '<div class="wpgooglecse-adminsettings-field">' . "\n";
+                echo '<input id="wpgooglecse_searchonly_title" type="checkbox" name="wpgooglecse_searchonly_title" value="t"';
+                if (get_option('wpgooglecse_searchonly_title')) {
+                    echo ' checked="checked"';
+                }
+                echo ' />' . "\n";
+                echo '<p class="wpgooglecse-adminsettings-field-help">Search with intitle: before the query</p>';
+                echo '</div>' . "\n";
+            },
+            'wp_googlecse_plugin', 'wpgooglecse_section', ['label_for' => 'wpgooglecse_searchonly_title', 'class' => 'regular-checkbox']
+        );
+
+        register_setting('wpgooglecse_option_group', 'wpgooglecse_searchonly_text', $callback);
+        add_settings_field(
+            'wpgooglecse_searchonly_text',
+            'Search only in the text',
+            function() {
+                echo '<div class="wpgooglecse-adminsettings-field">' . "\n";
+                echo '<input id="wpgooglecse_searchonly_text" type="checkbox" name="wpgooglecse_searchonly_text" value="t"';
+                if (get_option('wpgooglecse_searchonly_text')) {
+                    echo ' checked="checked"';
+                }
+                echo '/>' . "\n";
+                echo '<p class="wpgooglecse-adminsettings-field-help">Search with intext: before the query</p>';
+                echo '</div>' . "\n";
+            },
+            'wp_googlecse_plugin', 'wpgooglecse_section', ['label_for' => 'wpgooglecse_searchonly_text', 'class' => 'regular-checkbox']
+        );
+
+        register_setting('wpgooglecse_option_group', 'wpgooglecse_exactsearch', $callback);
+        add_settings_field(
+            'wpgooglecse_exactsearch',
+            'Exact search',
+            function() {
+                echo '<div class="wpgooglecse-adminsettings-field">' . "\n";
+                echo '<input id="wpgooglecse_exactsearch" type="checkbox" name="wpgooglecse_exactsearch" value="t"';
+                if (get_option('wpgooglecse_exactsearch')) {
+                    echo ' checked="checked"';
+                }
+                echo ' />' . "\n";
+                echo '<p class="wpgooglecse-adminsettings-field-help">The query will be enclosed in double quotes (eg. "the game")</p>';
+                echo '</div>' . "\n";
+            },
+            'wp_googlecse_plugin', 'wpgooglecse_section', ['label_for' => 'wpgooglecse_exactsearch', 'class' => 'regular-checkbox']
         );
 
         register_setting('wpgooglecse_option_group', 'wpgooglecse_container_html_class', $callback);
